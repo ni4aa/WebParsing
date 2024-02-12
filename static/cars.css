@@ -1,0 +1,52 @@
+@import url("normalize.css");
+
+body {
+    background-color: #F5F5F5;
+    display: flexbox;
+}
+button, img {
+    border: none;
+    border-radius: 100%;
+    width: 45px;
+    height: 42px;
+}
+.table {
+	width: 100%;
+	border: none;
+    margin-bottom: 20px;
+}
+.table thead th {
+	padding: 10px 15px;
+	background: #FBF1E9;
+	font-size: 14px;
+    border: none;
+    font-family: Roboto;
+	border-right: 1px solid #000000;
+}
+.table thead tr th:first-child {
+	border-radius: 4px 0 0 4px;
+    border-left: none;
+}
+.table thead tr th:last-child {
+	border-radius: 0 4px 4px 0;
+    border-right: none;
+}
+.table tbody td {
+	text-align: left;
+	border: none;
+	padding: 10px 15px;
+	font-size: 14px;
+	vertical-align: top;
+    background-color: white;
+    border-right: 1px solid #B4ABAB;
+}
+
+.table tbody tr td:first-child {
+	border-radius: 4px 0 0 4px;
+    background-color: #D3CDCD;
+    border-left: none;
+}
+.table tbody tr td:last-child {
+	border-radius: 0 4px 4px 0;
+    border-right: none;
+}

@@ -1,0 +1,72 @@
+{% load static %}
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
+    <title>{{title}}</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="table">
+        {% for car in object_list %}
+        <div class="table__item">
+          <div class="table__item__image">
+            <img class="table__item__image" src="{{car.image}}" alt="image" />
+          </div>
+          <div class="table__item__information">
+            <div class="table__item__information__title">
+              <a href="{{car.url}}">{{car.name}}</a>
+            </div>
+            <div class="table__item__information__main">
+              <div class="table__item__information__main__year">
+                year: {{car.year}}
+              </div>
+              <div class="table__item__information__main__lot-number">
+                lot number: {{car.lot_number}}
+              </div>
+              <div class="table__item__information__main__auction">
+                auction: {{car.auction}}
+              </div>
+              <div class="table__item__information__main__miles">
+                miles: {{cars.miles}} miles
+              </div>
+            </div>
+          </div>
+        </div>
+        {% endfor %}
+      </div>
+    </div>
+
+    <div class="tool-bar">
+      <div class="container">
+        <div class="tool-bar__item">
+          <div class="tool-bar__item__logo">
+            <img src="{% static "images/logo.png" %}" alt="logo">
+          </div>
+          <div class="tool-bar__item__search">будет поиск тут</div>
+          <a class="tool-bar__item__button" href="{% url 'refresh' %}">
+            <i class="fa-solid fa-rotate"></i>
+          </a>
+        </div>
+      </div>
+    </div>
+  </body>
+</html>
