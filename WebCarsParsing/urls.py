@@ -15,7 +15,7 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from WebPage.views import CarsView, refresh_bd, CarsListView
+from WebPage.views import refresh_bd, CarsListView
 
 urlpatterns = [
     path('', CarsListView.as_view(), name='index'),

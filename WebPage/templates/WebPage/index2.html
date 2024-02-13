@@ -54,7 +54,7 @@
         {% endfor %}
       </div>
     </div>
-
+    
     <div class="tool-bar">
       <div class="container">
         <div class="tool-bar__item">
@@ -63,7 +63,14 @@
           </div>
           <div class="tool-bar__item__search">
             <i class="fa-solid fa-magnifying-glass"></i>
-            <input class="search" type="text">
+            <form action="{% url 'index' %}" method="get">
+              <input
+                class="search"
+                type="text"
+                name="search"
+                placeholder="Search"
+              />
+            </form>
           </div>
           <a class="tool-bar__item__button" href="{% url 'refresh' %}">
             <i class="fa-solid fa-rotate"></i>

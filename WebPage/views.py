@@ -1,5 +1,7 @@
 from typing import Any
 from datetime import datetime
+
+from django.db.models import Q
 from django.shortcuts import render, HttpResponseRedirect
 from django.views.generic.base import TemplateView
 from django.views.generic.list import ListView
@@ -7,25 +9,20 @@ from WebPage.models import CarModel
 from WebPage.Parsing import CopartParse
 
 
-class CarsView(TemplateView):
-    template_name = 'WebPage/index2.html'
-
-    def get_context_data(self, **kwargs):
-        context = super(CarsView, self).get_context_data()
-        context['title'] = 'Cars'
-        context['cars'] = CarModel.objects.all()
-
-        return context
 
 
 class CarsListView(ListView):
     model = CarModel
     template_name = 'WebPage/index2.html'
 
+    def get_queryset(self):
+        queryset = super(CarsListView, self).get_queryset()
+        query = self.request.GET.get('search')
+        return queryset.filter(Q(name__icontains=query) | Q(auction__icontains=query)) if query else queryset
+
     def get_context_data(self, **kwargs):
         context = super(CarsListView, self).get_context_data()
         context['title'] = 'Cars'
-        context['cars'] = CarModel.objects.all()
 
         return context
 
