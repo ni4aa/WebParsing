@@ -61,7 +61,10 @@
           <div class="tool-bar__item__logo">
             <img src="{% static "images/logo.png" %}" alt="logo">
           </div>
-          <div class="tool-bar__item__search">будет поиск тут</div>
+          <div class="tool-bar__item__search">
+            <i class="fa-solid fa-magnifying-glass"></i>
+            <input class="search" type="text">
+          </div>
           <a class="tool-bar__item__button" href="{% url 'refresh' %}">
             <i class="fa-solid fa-rotate"></i>
           </a>
