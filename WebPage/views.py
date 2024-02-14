@@ -8,9 +8,6 @@ from django.views.generic.list import ListView
 from WebPage.models import CarModel
 from WebPage.Parsing import CopartParse
 
-
-
-
 class CarsListView(ListView):
     model = CarModel
     template_name = 'WebPage/index2.html'

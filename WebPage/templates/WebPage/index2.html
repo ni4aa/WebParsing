@@ -29,16 +29,13 @@
         {% for car in object_list %}
         <div class="table__item">
           <div class="table__item__image">
-            <img class="table__item__image" src="{{car.image}}" alt="image" />
+            <img class="table__item__image" src="{{car.image}}" alt="car" />
           </div>
           <div class="table__item__information">
             <div class="table__item__information__title">
-              <a href="{{car.url}}">{{car.name}}</a>
+              <a class='text-title' href="{{car.url}}">{{car.name}}</a>
             </div>
             <div class="table__item__information__main">
-              <div class="table__item__information__main__year">
-                year: {{car.year}}
-              </div>
               <div class="table__item__information__main__lot-number">
                 lot number: {{car.lot_number}}
               </div>
