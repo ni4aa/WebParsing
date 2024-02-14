@@ -33,7 +33,7 @@
           </div>
           <div class="table__item__information">
             <div class="table__item__information__title">
-              <a class='text-title' href="{{car.url}}">{{car.name}}</a>
+              <a class="text-title" href="{{car.url}}">{{car.name}}</a>
             </div>
             <div class="table__item__information__main">
               <div class="table__item__information__main__lot-number">
@@ -42,16 +42,44 @@
               <div class="table__item__information__main__auction">
                 auction: {{car.auction}}
               </div>
-              <div class="table__item__information__main__miles">
-                miles: {{cars.miles}} miles
-              </div>
             </div>
           </div>
+          {% comment %} <div class="table__item__description">
+            <form
+              class="description-form"
+              action="{% url 'update_object' %}"
+              method="get"
+            >
+              {% if car.description %}
+              <textarea class="description">{{car.description}}</textarea>
+              {% else %}
+              <textarea
+                class="description"
+                placeholder="Description"
+              ></textarea>
+              {% endif %}
+            </form>
+          </div> {% endcomment %}
         </div>
         {% endfor %}
+        
+        <ul class="pagination">
+          <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
+            <a class="page-link"
+               href="{% if page_obj.has_previous %} {% url 'paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+               tabindex="-1" aria-disabled="true">Previous</a>
+          </li>
+            {% for page in paginator.page_range %}
+                <li class="page-item"><a class="page-link" href="{% url 'paginator' page %}" >{{ page }}</a></li>
+            {% endfor %}
+          <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
+            <a class="page-link" href="{% if page_obj.has_next %} {% url 'paginator' page_obj.next_page_number %} {% else %} # {% endif %}">Next</a>
+          </li>
+        </ul>
       </div>
     </div>
-    
+      
+
     <div class="tool-bar">
       <div class="container">
         <div class="tool-bar__item">
@@ -69,7 +97,7 @@
               />
             </form>
           </div>
-          <a class="tool-bar__item__button" href="{% url 'refresh' %}">
+          <a class="tool-bar__item__button" href="{% url 'update' %}">
             <i class="fa-solid fa-rotate"></i>
           </a>
         </div>

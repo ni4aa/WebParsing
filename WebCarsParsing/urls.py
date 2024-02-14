@@ -15,10 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from WebPage.views import refresh_bd, CarsListView
+from WebPage.views import update_bd, CarsListView, update_description
 
 urlpatterns = [
     path('', CarsListView.as_view(), name='index'),
+    path('page/<int:page>/', CarsListView.as_view(), name='paginator'),
     path('admin/', admin.site.urls),
-    path('refresh/', refresh_bd, name='refresh')
+    path('update/', update_bd, name='update'),
+    path('update_object/', update_description, name='update_object')
 ]

@@ -4,6 +4,7 @@ body {
 
 .container {
     margin: 0 5%;
+    height: 100%;
 }
 
 .tool-bar {
@@ -76,11 +77,16 @@ body {
     justify-content: center;
     text-transform: none;
     text-decoration: none;
+    box-shadow: 0 6px 4px rgba(0, 0, 0, 0.25);
+}
+
+.tool-bar__item__button:active {
+    box-shadow: none;
 }
 
 .fa-rotate {
     color: black;
-    font-size: 20px;
+    font-size: 35px;
 
 }
 
@@ -88,6 +94,7 @@ body {
     position: relative;
     top: 150px;
     width: 100%;
+    height: 100%;
     font-size: 20px;
 }
 
@@ -112,7 +119,7 @@ body {
 
 .table__item__information {
     height: 80px;
-    width: 50%;
+    width: 60%;
     border: 1px solid black;
     border-radius: 5px;
     padding: 10px;
@@ -123,7 +130,7 @@ body {
 
 .table__item__information__title {
     font-family: 'Courier New', Courier, monospace;
-   
+
 }
 
 .text-title {
@@ -135,11 +142,86 @@ body {
 .table__item__information__main {
     display: flex;
     margin-top: 10px;
-    /* border: 1px solid blue; */
     justify-content: space-between;
 
 }
 
-.table__item__description__form {
+.table__item__description {
+    width: 20%;
     height: 100%;
+    background-color: white;
+}
+
+.description-form {
+    height: 100%;
+}
+
+.description {
+    height: 100%;
+    width: 100%;
+    padding: 2px 2px;
+    box-sizing: border-box;
+    border: 2px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    font-size: 16px;
+    resize: none;
+}
+
+.pagination {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+
+    list-style: none;
+    text-decoration: none;
+    text-transform: none;
+
+
+}
+
+.page-item {
+    border: 1px solid black;
+    padding: 2px 5px;
+    margin-bottom: 30px;
+
+}
+
+.page-item:hover {
+    background-color: #966a6a;
+}
+
+.page-item:hover a {
+    color: rgb(56, 215, 101);
+}
+
+.page-item:first-child {
+    border-radius: 5px 0 0 5px;
+}
+
+
+.page-item:last-child {
+    border-radius: 0 5px 5px 0;
+}
+
+
+.page-link {
+    text-decoration: none;
+    text-transform: none;
+    color: #000;
+}
+
+.disabled a {
+    color: #6c757d;
+    pointer-events: none;
+    cursor: auto;
+}
+
+.disabled:hover {
+    background-color: unset;
+}
+
+.disabled:hover a {
+    color: #6c757d;
 }
