@@ -6,10 +6,6 @@ from datetime import timedelta, datetime
 import requests
 from WebPage.models import CarModel
 
-
-
-
-
 def get_deltatime(date:str):
     day_index = date.index('D')
     days = int(date[:day_index])
@@ -56,29 +52,29 @@ class CopartParse:
                 find_element(By.CSS_SELECTOR, '[class="ng-star-inserted"]').get_attribute('href') for title in titles]
 
         for url in urls:
-            self.driver.get(url)
-            WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((
-                By.CSS_SELECTOR, '[class="title my-0 mr-10"]')))
-
-            lot_number = self.driver.find_element(By.ID, 'LotNumber').text
-
-            name = self.driver.find_element(By.CSS_SELECTOR, '[class="title my-0 mr-10"]').text
-
-            auction = self.driver.find_element(By.CSS_SELECTOR, '[class="panel-content"]').\
-                find_element(By.CSS_SELECTOR, '[class="border-top-gray pt-5 d-flex"]').\
-                find_element(By.CSS_SELECTOR, '[class="lot-details-desc"]').text
-
-            pictures = self.driver.find_elements(By.CSS_SELECTOR,
-                                                 '[class="img-responsive cursor-pointer thumbnailImg"]')
-            picture_url = pictures[0].get_attribute('full-url')
-
-            miles = self.driver.find_element(By.CSS_SELECTOR, '[class="lot-details-desc odometer-value w100"]').text
-
-            date = self.driver.find_element(By.CSS_SELECTOR, '[data-uname="lotdetailSaleinformationtimeleftvalue"]').text
-
-            delete_date = datetime.now() + get_deltatime(date)
-
             if not CarModel.objects.filter(url=url):
+                self.driver.get(url)
+                WebDriverWait(self.driver, 30).until(EC.presence_of_element_located((
+                    By.CSS_SELECTOR, '[class="title my-0 mr-10"]')))
+
+                lot_number = self.driver.find_element(By.ID, 'LotNumber').text
+
+                name = self.driver.find_element(By.CSS_SELECTOR, '[class="title my-0 mr-10"]').text
+
+                auction = self.driver.find_element(By.CSS_SELECTOR, '[class="panel-content"]').\
+                    find_element(By.CSS_SELECTOR, '[class="border-top-gray pt-5 d-flex"]').\
+                    find_element(By.CSS_SELECTOR, '[class="lot-details-desc"]').text
+
+                pictures = self.driver.find_elements(By.CSS_SELECTOR,
+                                                     '[class="img-responsive cursor-pointer thumbnailImg"]')
+                picture_url = pictures[0].get_attribute('full-url')
+
+                miles = self.driver.find_element(By.CSS_SELECTOR, '[class="lot-details-desc odometer-value w100"]').text
+
+                date = self.driver.find_element(By.CSS_SELECTOR, '[data-uname="lotdetailSaleinformationtimeleftvalue"]').text
+
+                delete_date = datetime.now() + get_deltatime(date)
+
                 CarModel.objects.create(name=name, lot_number=lot_number, auction=auction, url=url,
                                         image=picture_url, date=delete_date)
 

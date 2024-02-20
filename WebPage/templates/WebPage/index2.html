@@ -2,68 +2,125 @@
 
 <!DOCTYPE html>
 <html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="{% static 'fontawesomefree/css/fontawesome.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/brands.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link
+      href="{% static 'fontawesomefree/css/solid.css' %}"
+      rel="stylesheet"
+      type="text/css"
+    />
+    <link rel="stylesheet" href="{% static 'css/style.css' %}" />
+    <link rel="stylesheet" href="{% static 'css/table.css' %}" />
+    <title>{{title}}</title>
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <link href="{% static 'fontawesomefree/css/fontawesome.css' %}" rel="stylesheet" type="text/css" />
-  <link href="{% static 'fontawesomefree/css/brands.css' %}" rel="stylesheet" type="text/css" />
-  <link href="{% static 'fontawesomefree/css/solid.css' %}" rel="stylesheet" type="text/css" />
-  <link rel="stylesheet" href="{% static 'css/style2.css' %}" />
-  <title>{{title}}</title>
-</head>
-
-<body>
-  <div class="container">
-    <div class="table">
-      {% for car in object_list %}
+  <body>
+    <div class="container">
+      <div class="table">
+        {% for car in object_list %}
         <div class="table__item">
           <div class="table__item__title">
             <a href="{{car.url}}">{{car.name}}</a>
           </div>
-          
+          <div class="table__item__main">
+            <div class="table__item__image">
+              <img
+                class="table__item__image"
+                src="{{car.image}}"
+                alt="car image"
+              />
+            </div>
+            <div class="table__item__block content">
+              <div class="table__item__block__item">Auction</div>
+              <div class="table__item__block__item">Lot number</div>
+              <div class="table__item__block__item">Time</div>
+            </div>
+            <div class="table__item__information content">
+              <div class="table__item__information__item">{{car.auction}}</div>
+              <div class="table__item__information__item">
+                {{car.lot_number}}
+              </div>
+              <div class="table__item__information__item">{{car.date}}</div>
+            </div>
+            <div class="table__item__block content">
+              <div class="table__item__block__item">Odometer</div>
+              <div class="table__item__block__item">Engine Volume</div>
+              <div class="table__item__block__item">Other</div>
+            </div>
+            <div class="table__item__information content">
+              <div class="table__item__information__item">{{car.miles}}</div>
+              <div class="table__item__information__item">{{car.engine}}</div>
+              <div class="table__item__information__item">something</div>
+            </div>
+          </div>
         </div>
-      {% endfor %}
-        
-      <ul class="pagination">
-        <li class="page-item {% if not page_obj.has_previous %} disabled {% endif %}">
-          <a class="page-link"
-            href="{% if page_obj.has_previous %} {% url 'paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
-            tabindex="-1" aria-disabled="true">Previous</a>
-        </li>
-        {% for page in paginator.page_range %}
-        <li class="page-item">
-          <a class="page-link" href="{% url 'paginator' page %}">{{ page }}</a>
-        </li>
         {% endfor %}
-        <li class="page-item {% if not page_obj.has_next %} disabled {% endif %}">
-          <a class="page-link"
-            href="{% if page_obj.has_next %} {% url 'paginator' page_obj.next_page_number %} {% else %} # {% endif %}">Next</a>
-        </li>
-      </ul>
 
-    </div>
+        <ul class="pagination">
+          <li
+            class="page-item {% if not page_obj.has_previous %} disabled {% endif %}"
+          >
+            <a
+              class="page-link"
+              href="{% if page_obj.has_previous %} {% url 'paginator' page_obj.previous_page_number %} {% else %} # {% endif %}"
+              tabindex="-1"
+              aria-disabled="true"
+              >Previous</a
+            >
+          </li>
+          {% for page in paginator.page_range %}
+          <li class="page-item">
+            <a class="page-link" href="{% url 'paginator' page %}"
+              >{{ page }}</a
+            >
+          </li>
+          {% endfor %}
+          <li
+            class="page-item {% if not page_obj.has_next %} disabled {% endif %}"
+          >
+            <a
+              class="page-link"
+              href="{% if page_obj.has_next %} {% url 'paginator' page_obj.next_page_number %} {% else %} # {% endif %}"
+              >Next</a
+            >
+          </li>
+        </ul>
+      </div>
 
-    <div class="tool-bar">
-      <div class="container">
-        <div class="tool-bar__item">
-          <div class="tool-bar__item__logo">
-            <img src="{% static 'images/logo.png' %}" alt="logo">
+      <div class="tool-bar">
+        <div class="container">
+          <div class="tool-bar__item">
+            <div class="tool-bar__item__logo">
+              <img src="{% static 'images/logo.png' %}" alt="logo" />
+            </div>
+            <div class="tool-bar__item__search">
+              <form class="search" action="{% url 'index' %}" method="get">
+                <input
+                  class="search"
+                  type="text"
+                  name="search"
+                  placeholder="Search"
+                />
+              </form>
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </div>
+            <a class="tool-bar__item__button" href="{% url 'update' %}">
+              <img src="{% static 'images/rotate.png' %}" alt="logo" />
+            </a>
           </div>
-          <div class="tool-bar__item__search">
-            <form class="search" action="{% url 'index' %}" method="get">
-              <input class="search" type="text" name="search" placeholder="Search" />
-            </form>
-            <i class="fa-solid fa-magnifying-glass"></i>
-          </div>
-          <a class="tool-bar__item__button" href="{% url 'update' %}">
-            <i class="fa-solid fa-rotate"></i>
-          </a>
         </div>
       </div>
     </div>
-
-  </div>
-</body>
-
+  </body>
 </html>
